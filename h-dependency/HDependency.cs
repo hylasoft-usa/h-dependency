@@ -17,14 +17,15 @@ namespace hylasoft.dependency
     /// </summary>
     /// <param name="test">If set to true, the provider can be reinitialized (default to false). It's useful when the provider needs to be used in unit tests, so it can be reinitialized</param>
     /// <exception cref="InvalidOperationException">This exception is thrown when the provider can't be instantiated, because it has already been instantiated in debug mode</exception>
-    public static void Initialize(bool test = false)
+    /// <returns>the newly created instance of the provider</returns>
+    public static HDependency Initialize(bool test = false)
     {
       if (!_canBeInitialized)
         throw new InvalidOperationException("The dependency Initializer cannot be started twice if it's not initialized in test mode.");
       //set a new dependency injector.
-      Provider = new HDependency { _services = new Dictionary<Type, object>() };
-      
+      Provider = new HDependency();
       _canBeInitialized = test;
+      return Provider;
     }
 
     public static HDependency Provider { get; private set; }
@@ -36,12 +37,15 @@ namespace hylasoft.dependency
     /// <summary>
     /// default constructor made private
     /// </summary>
-    internal HDependency() { }
+    internal HDependency()
+    {
+      _services = new Dictionary<Type, object>();
+    }
 
     /// <summary>
     /// Dictornary containing all the registered service classes
     /// </summary>
-    private IDictionary<Type, object> _services;
+    private readonly IDictionary<Type, object> _services;
 
     /// <summary>
     /// Register an instance in the provider
