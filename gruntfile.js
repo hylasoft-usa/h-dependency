@@ -15,6 +15,7 @@ module.exports = function(grunt) {
     srcPath: 'h-dependency/',
     productName: 'h-dependency',
     dotNetVersion: '4.5.0',
+    platform: 'Any CPU',
 
 
     pkg: grunt.file.readJSON('package.json'),
@@ -38,7 +39,7 @@ module.exports = function(grunt) {
         src: ['<%= srcPath %>h-dependency.sln'],
         options: {
           projectConfiguration: 'Release',
-          platform: 'Any CPU',
+          platform: '<%= platform %>',
           targets: ['Clean', 'Rebuild'],
           stdout: true
         }
@@ -46,14 +47,24 @@ module.exports = function(grunt) {
       debug: {
         src: ['<%= srcPath %>h-dependency.sln'],
         options: {
-          projectConfiguration: 'Release',
-          platform: 'Any CPU',
+          projectConfiguration: 'Debug',
+          platform: '<%= platform %>',
           targets: ['Clean', 'Rebuild'],
           stdout: true
         }
       }
+    },
+
+    mstest: {
+      debug: {
+        src: ['<%= srcPath %>/**/bin/Debug/*.dll'] // Points to test dll
+      }
     }
 
   });
+  grunt.registerTask('default', ['build']);
+
+  grunt.registerTask('build', ['msbuild:release']);
+  grunt.registerTask('test', ['msbuild:debug', 'mstest']);
 
 }
