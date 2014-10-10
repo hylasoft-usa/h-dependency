@@ -12,8 +12,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     //set this variables for different projects
-    srcPath : 'h-dependency/',
-    productName : 'h-dependency',
+    srcPath: 'h-dependency/',
+    productName: 'h-dependency',
+    dotNetVersion: '4.5.0',
 
 
     pkg: grunt.file.readJSON('package.json'),
@@ -31,6 +32,27 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    msbuild: {
+      release: {
+        src: ['<%= srcPath %>h-dependency.sln'],
+        options: {
+          projectConfiguration: 'Release',
+          platform: 'Any CPU',
+          targets: ['Clean', 'Rebuild'],
+          stdout: true
+        }
+      },
+      debug: {
+        src: ['<%= srcPath %>h-dependency.sln'],
+        options: {
+          projectConfiguration: 'Release',
+          platform: 'Any CPU',
+          targets: ['Clean', 'Rebuild'],
+          stdout: true
+        }
+      }
+    }
 
   });
 
