@@ -17,7 +17,6 @@ module.exports = function(grunt) {
     dotNetVersion: '4.5.0',
     platform: 'Any CPU',
 
-
     pkg: grunt.file.readJSON('package.json'),
 
     assemblyinfo: {
@@ -62,9 +61,9 @@ module.exports = function(grunt) {
     }
 
   });
+
   grunt.registerTask('default', ['build']);
-
   grunt.registerTask('build', ['msbuild:release']);
-  grunt.registerTask('test', ['msbuild:debug', 'mstest']);
-
+  grunt.registerTask('test', ['build', 'mstest']);
+  grunt.registerTask('release', ['assemblyinfo','test']);
 }
