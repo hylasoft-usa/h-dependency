@@ -7,7 +7,7 @@
     <ProjectGuid>{3FB0D4C4-03AC-4670-918B-B60A14289079}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>hylasoft.dependency</RootNamespace>
+    <RootNamespace>Hylasoft.Dependency</RootNamespace>
     <AssemblyName>h-dependency</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
