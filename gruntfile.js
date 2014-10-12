@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 
     mstest: {
       debug: {
-        src: ['<%= srcPath %>/**/bin/Debug/*.dll'] // Points to test dll
+        src: ['<%= srcPath %>/**/bin/Release/*.dll'] // Points to test dll
       }
     }
 
@@ -65,6 +65,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['build']);
 
   grunt.registerTask('build', ['msbuild:release']);
-  grunt.registerTask('test', ['msbuild:debug', 'mstest']);
+  grunt.registerTask('test', ['msbuild:release', 'mstest']);
 
 }
