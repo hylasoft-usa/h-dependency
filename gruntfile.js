@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
     mstest: {
       debug: {
-        src: ['<%= srcPath %>/**/bin/Debug/*.dll'] // Points to test dll
+        src: ['<%= srcPath %>/**/bin/Release/*.dll'] // Points to test dll
       }
     }
 
