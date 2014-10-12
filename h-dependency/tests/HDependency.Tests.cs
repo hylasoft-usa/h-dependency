@@ -2,7 +2,7 @@
 using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace hylasoft.dependency.tests
+namespace Hylasoft.Dependency.Tests
 {
   [TestClass]
   public class AccountTest
@@ -11,20 +11,21 @@ namespace hylasoft.dependency.tests
     public void ShouldInitializeTheSingletonCorrectly()
     {
       // Init to true
-      var dep = HDependency.Initialize(true);
-      Assert.AreEqual(dep, HDependency.Provider, "the returned hdep should be the same of the singleton");
+      var dep = Hdependency.Initialize(true);
+      Assert.AreEqual(dep, Hdependency.Provider, "the returned hdep should be the same of the singleton");
       try
       {
-        HDependency.Initialize();
+        Hdependency.Initialize();
       }
       catch (Exception)
       {
         Assert.Fail("it shouldn't fail this time, since it's in test");
       }
-      Assert.AreNotEqual(dep, HDependency.Provider, "the two deps now shouldn't be the same, since it's been reinitialized");
+      Assert.AreNotEqual(dep, Hdependency.Provider,
+        "the two deps now shouldn't be the same, since it's been reinitialized");
       try
       {
-        HDependency.Initialize(true);
+        Hdependency.Initialize(true);
         Assert.Fail("It should fail now because it has been not initialized in test mode before");
       }
       catch (InvalidOperationException e)
@@ -36,7 +37,7 @@ namespace hylasoft.dependency.tests
     [TestMethod]
     public void ShouldGetTheRightService()
     {
-      var dep = new HDependency();
+      var dep = new Hdependency();
       IEnumerable service = "test"; //a string is a valid IEnumerable, so this is possible
       dep.Register<IEnumerable>(service);
       Assert.AreEqual("test", dep.Get<IEnumerable>());
@@ -45,7 +46,7 @@ namespace hylasoft.dependency.tests
     [TestMethod]
     public void ShouldntRegisterTwice()
     {
-      var dep = new HDependency();
+      var dep = new Hdependency();
       IEnumerable service = "test"; //a string is a valid IEnumerable, so this is possible
       dep.Register<IEnumerable>(service);
       try
@@ -62,7 +63,7 @@ namespace hylasoft.dependency.tests
     [TestMethod]
     public void ShouldntRegisterWrongInterface()
     {
-      var dep = new HDependency();
+      var dep = new Hdependency();
       var service = new object();
       try
       {
@@ -78,7 +79,7 @@ namespace hylasoft.dependency.tests
     [TestMethod]
     public void ShouldThrowArgumentExceptionWhenNoService()
     {
-      var dep = new HDependency();
+      var dep = new Hdependency();
       try
       {
         dep.Get<IEnumerable>(); //no such service
@@ -90,5 +91,4 @@ namespace hylasoft.dependency.tests
       }
     }
   }
-
 }
