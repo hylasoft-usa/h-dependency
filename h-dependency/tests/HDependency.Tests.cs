@@ -28,7 +28,7 @@ namespace Hylasoft.Dependency.Tests
         Hdependency.Initialize(true);
         Assert.Fail("It should fail now because it has been not initialized in test mode before");
       }
-      catch (InvalidOperationException e)
+      catch (InvalidOperationException)
       {
         //here is fine, the exception is being correctly thrown
       }
