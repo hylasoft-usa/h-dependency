@@ -19,6 +19,7 @@ module.exports = function(grunt) {
     dotNetVersion: '4.5.0',
     platform: 'Any CPU',
     styleCopRules: 'Settings.StyleCop',
+    ruleSet: 'rules.ruleset',
 
     pkg: grunt.file.readJSON('package.json'),
 
@@ -55,6 +56,9 @@ module.exports = function(grunt) {
             StyleCopEnabled: true,
             StyleCopTreatErrorsAsWarnings: false,
             StyleCopOverrideSettingsFile: '../<%= styleCopRules %>',
+            RunCodeAnalysis: true,
+            CodeAnalysisRuleSet: '<%= ruleSet %>',
+            TreatWarningsAsErrors: true
           },
         }
       }
