@@ -19,8 +19,6 @@ module.exports = function(grunt) {
     dotNetVersion: '4.5.0',
     platform: 'Any CPU',
     styleCopRules: 'Settings.StyleCop',
-    styleCopTargetPath: process.cwd() + '/' + '<%= srcPath %>packages/BuildTools.StyleCop.4.7.49.0/tools/StyleCop.targets',
-    styleCopPlusTargetPath: process.cwd() + '/' + '<%= srcPath %>packages/BuildTools.StyleCopPlus.4.7.49.4/tools',
 
     pkg: grunt.file.readJSON('package.json'),
 
@@ -36,10 +34,6 @@ module.exports = function(grunt) {
           title: '<%= productName %>'
         }
       }
-    },
-
-    fileExists: {
-      styleCop: [process.cwd() + '/<%= srcPath %>packages/BuildTools.StyleCop.4.7.49.0/tools/StyleCop.targets']
     },
 
     msbuild: {
@@ -61,8 +55,6 @@ module.exports = function(grunt) {
             StyleCopEnabled: true,
             StyleCopTreatErrorsAsWarnings: false,
             StyleCopOverrideSettingsFile: '../<%= styleCopRules %>',
-            CustomBeforeMicrosoftCSharpTargets: process.cwd() + '\\'+'import.xml',
-            CustomAfterMicrosoftCSharpTargets: '<%= styleCopTargetPath %>'
           },
         }
       }
@@ -76,17 +68,8 @@ module.exports = function(grunt) {
 
   });
 
-  // Check that stylecop exists
-  grunt.registerTask('styleCopExists',function () {
-    var fs = require('fs');
-    if(!fs.existsSync(grunt.config().styleCopTargetPath)){
-      grunt.fatal('It appears stylecop doesn\'t exist. Check that you added BuildTools.StyleCopPlus to the nuget dependencies for at least one project, and that the version number is correct, otherwise change the variable styleCopTargetPath in the gruntfile.js to reflect the right version')
-    }
-  })
-
-
   grunt.registerTask('default', ['build']);
   grunt.registerTask('build', ['msbuild:release']);
-  grunt.registerTask('test', ['styleCopExists','msbuild:debug', 'mstest']);
+  grunt.registerTask('test', ['msbuild:debug', 'mstest']);
   grunt.registerTask('release', ['assemblyinfo', 'test']);
 }
