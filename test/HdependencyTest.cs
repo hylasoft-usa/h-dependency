@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Hylasoft.Dependency.Tests
 {
   [TestClass]
-  public class AccountTest : Spec
+  public class HdependencyTest : Spec
   {
     [TestMethod]
     public void ShouldInitializeTheSingletonCorrectly()

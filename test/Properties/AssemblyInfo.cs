@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("h-dependency")]
+[assembly: AssemblyTitle("test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP")]
-[assembly: AssemblyProduct("h-dependency")]
+[assembly: AssemblyProduct("test")]
 [assembly: AssemblyCopyright("Copyright © HP 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3f2f7385-3b9b-434f-9a54-6194b9ab7bce")]
+[assembly: Guid("feb3e238-ce6b-46d4-8556-85cf2d8db104")]
 
 // Version information for an assembly consists of the following four values:
 //

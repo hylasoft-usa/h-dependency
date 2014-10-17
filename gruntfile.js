@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     projectName: 'h-dependency',
 
     // These variables shouldn't be changed, but sometimes it might be necessary
-    srcPath: 'h-dependency/',
+    srcPath: './',
     solutionName: '<%= projectName %>.sln',
     dotNetVersion: '4.5.0',
     platform: 'Any CPU',
@@ -45,8 +45,7 @@ module.exports = function(grunt) {
           platform: '<%= platform %>',
           targets: ['Clean', 'Rebuild'],
           buildParameters: {
-            StyleCopEnabled: false,
-            nowarn: '1591'
+            StyleCopEnabled: false
           }
         }
       },
@@ -62,8 +61,7 @@ module.exports = function(grunt) {
             StyleCopOverrideSettingsFile: '../<%= styleCopRules %>',
             RunCodeAnalysis: true,
             CodeAnalysisRuleSet: '../<%= ruleSet %>',
-            TreatWarningsAsErrors: true,
-            nowarn: '1591'
+            TreatWarningsAsErrors: true
           },
         }
       }
