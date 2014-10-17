@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Hylasoft.Dependency</id>
+    <version>0.0</version> <!-- Not important, gets overridden by the grunt task -->
+    <title>Hylasoft.Dependency</title>
+    <description>Dead Simple dependency mechanism provider to achieve loose coupling and easy mocking.</description>
+    <authors>Giacomo Tagliabue</authors>
+    <language>en-US</language>
+    <owners>Hylasoft Usa</owners>
+    <licenseUrl>https://github.com/hylasoft-usa/h-dependency/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/hylasoft-usa/h-dependency/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>Dependency Injection Inversion Control IoC Hyla Hylasoft</tags>
+  </metadata>
+  <files>
+    <file src="h-dependency.dll" target="lib"/>
+    <file src="h-dependency.xml" target="lib"/>
+  </files>
+</package>

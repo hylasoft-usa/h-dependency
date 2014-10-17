@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 
         options: {
           version: '<%= pkg.version %>',
-          basePath: '<%= srcPath %>/bin/Release',
+          basePath: '<%= projectName %>/bin/Release',
           includeReferencedProjects: true,
           excludeEmptyDirectories: true,
           verbose: true
