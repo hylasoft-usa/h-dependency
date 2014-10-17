@@ -32,6 +32,9 @@ namespace Hylasoft.Dependency
       return Provider;
     }
 
+    /// <summary>
+    /// Gets the currently initialized provider. If the provider has not been initialized, it returns null
+    /// </summary>
     public static Hdependency Provider { get; private set; }
 
     private static bool _canBeInitialized = true;
