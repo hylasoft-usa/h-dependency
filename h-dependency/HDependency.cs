@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("h-dependency.test")]
 
 namespace Hylasoft.Dependency
 {
@@ -33,7 +36,7 @@ namespace Hylasoft.Dependency
     }
 
     /// <summary>
-    /// Gets the currently initialized provider. If the provider has not been initialized, it returns null
+    /// Gets the currently initialized provider. If the provider has not been initialized it returns null
     /// </summary>
     public static Hdependency Provider { get; private set; }
 
@@ -42,7 +45,7 @@ namespace Hylasoft.Dependency
     #endregion
 
     /// <summary>
-    /// default constructor made private
+    /// default constructor made private to enforce singleton pattern
     /// </summary>
     internal Hdependency()
     {
