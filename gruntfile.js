@@ -11,15 +11,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     // Set this variables for different projects
-    srcPath: 'h-dependency/',
-    productName: 'h-dependency',
+    projectName: 'h-dependency',
 
     // These variables shouldn't be changed, but sometimes it might be necessary
-    solutionName: '<%= productName %>.sln',
+    srcPath: 'h-dependency/',
+    solutionName: '<%= projectName %>.sln',
     dotNetVersion: '4.5.0',
     platform: 'Any CPU',
     styleCopRules: 'Settings.StyleCop',
     ruleSet: 'rules.ruleset',
+    nuspecFile: 'package.nuspec',
 
     pkg: grunt.file.readJSON('package.json'),
 
@@ -31,8 +32,7 @@ module.exports = function(grunt) {
           fileVersion: '<%= pkg.version %>',
           company: 'hylasoft',
           copyright: ' ',
-          product: '<%= productName %>',
-          title: '<%= productName %>'
+          product: '<%= projectName %>'
         }
       }
     },
@@ -43,7 +43,11 @@ module.exports = function(grunt) {
         options: {
           projectConfiguration: 'Release',
           platform: '<%= platform %>',
-          targets: ['Clean', 'Rebuild']
+          targets: ['Clean', 'Rebuild'],
+          buildParameters: {
+            StyleCopEnabled: false,
+            nowarn: '1591'
+          }
         }
       },
       debug: {
@@ -57,8 +61,9 @@ module.exports = function(grunt) {
             StyleCopTreatErrorsAsWarnings: false,
             StyleCopOverrideSettingsFile: '../<%= styleCopRules %>',
             RunCodeAnalysis: true,
-            CodeAnalysisRuleSet: '<%= ruleSet %>',
-            TreatWarningsAsErrors: true
+            CodeAnalysisRuleSet: '../<%= ruleSet %>',
+            TreatWarningsAsErrors: true,
+            nowarn: '1591'
           },
         }
       }
@@ -66,9 +71,33 @@ module.exports = function(grunt) {
 
     mstest: {
       debug: {
-        src: ['<%= srcPath %>/**/bin/Debug/*.dll'] // Points to test dll
+        src: ['<%= srcPath %>/**/bin/Debug/*.dll', '<%= srcPath %>/**/bin/Debug/*.exe'] // Points to test dll
       }
-    }
+    },
+
+    nugetpack: {
+      dist: {
+        src: '<%= nuspecFile %>',
+        dest: '.',
+
+        options: {
+          version: '<%= pkg.version %>',
+          basePath: '<%= srcPath %>/bin/Release',
+          includeReferencedProjects: true,
+          excludeEmptyDirectories: true,
+          verbose: true
+        }
+      }
+    },
+
+    nugetpush: {
+      src: '*.<%= pkg.version %>.nupkg',
+      options: {}
+    },
+
+    clean: {
+      nuget: ['*.nupkg'],
+    },
 
   });
 
@@ -76,4 +105,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['msbuild:release']);
   grunt.registerTask('test', ['msbuild:debug', 'mstest']);
   grunt.registerTask('release', ['test', 'assemblyinfo']);
-}
+  grunt.registerTask('publishNuget', ['release', 'msbuild:release', 'nugetpack', 'nugetpush', 'clean:nuget']);
+};
